@@ -47,11 +47,19 @@ const SellCakeContainer = () => {
 
     const [cakeCount, setCakeCount] = useState(0);
 
+  
 
+    var sum = 0;
+    for(var i = 0; i<cakeMenu.length; i++){
+        sum += parseInt(cakeMenu[i].rating, 10);
+    }
+    var avg = sum/cakeMenu.length;
 
+    
     return(
         <>
             <h2>Cake Menu</h2>
+            <p>Average Rating: {avg}</p>
             <>
                 {cakeMenu.map((cake, index) => {
                     return (

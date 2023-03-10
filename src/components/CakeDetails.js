@@ -1,8 +1,9 @@
-function CakeDetails({cake,count, onButtonClick}){
+function CakeDetails({cake,count,onButtonClick}){
 
     const handleSellCakeClick = () => {
         onButtonClick(count+cake.price);
     }
+
    
     return(
         <>
