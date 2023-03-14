@@ -1,9 +1,11 @@
 import { useState } from "react";
-import CakeDetails from "../components/CakeDetails";
+
+import CakeList from "../components/CakeList";
+import CakeForm from "../components/CakeForm";
 
 const SellCakeContainer = () => {
     
-    let cakeMenu =[
+    let [cakeMenu, setCakeMenu] = useState([
         {
             cakeName: "Victoria Sponge",
                ingredients: [
@@ -43,31 +45,31 @@ const SellCakeContainer = () => {
                price: 8,
                rating: 5
         }      
-    ]
+    ])
 
     const [cakeCount, setCakeCount] = useState(0);
 
+    const onButtonClick = (cakePrice) => {
+        setCakeCount(cakeCount + cakePrice);
+    }
+
   
 
-    var sum = 0;
-    for(var i = 0; i<cakeMenu.length; i++){
+    let sum = 0;
+    for(let i = 0; i<cakeMenu.length; i++){
         sum += parseInt(cakeMenu[i].rating, 10);
     }
-    var avg = sum/cakeMenu.length;
+    let avg = sum/cakeMenu.length;
 
     
     return(
         <>
             <h2>Cake Menu</h2>
             <p>Average Rating: {avg}</p>
-            <>
-                {cakeMenu.map((cake, index) => {
-                    return (
-                     <CakeDetails cake={cake} key={index} count={cakeCount} onButtonClick ={setCakeCount}></CakeDetails>
-                    )
-                })}
-            </>
+            <CakeList cakeMenu= {cakeMenu} count={cakeCount} onButtonClick ={onButtonClick}/>
+           
             <p>Total Sales: £{cakeCount} </p>
+            <CakeForm cakes={cakeMenu} setCakes={setCakeMenu}/>
         </>
     )
 }
